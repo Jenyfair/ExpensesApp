@@ -17,11 +17,12 @@ import {
 import { MainStackParamList } from "./MainStack";
 import { horizontalScale } from "../util/scaling";
 import AllPlaces from "../screens/AllPlaces";
+import { IPlace } from "../types/place";
 
 export type BottomNavigatorParamList = {
   AllExpenses: undefined;
   RecentExpenses: undefined;
-  AllPlaces: undefined;
+  AllPlaces: { place: IPlace | null };
 };
 
 export type AllExpensesScreenProp = BottomTabNavigationProp<
@@ -115,7 +116,7 @@ const BottomTabNav = () => {
             <IconButton
               icon={{ size: 24, name: "add", color: tintColor }}
               onPress={() => {
-                navigation.navigate("AddPlace");
+                navigation.navigate("AddPlace", { location: null });
               }}
             />
           ),

@@ -1,10 +1,9 @@
+import { Location } from "./location";
+
 export interface IPlace {
   id: string;
-  title?: string;
+  title: string;
   address?: string;
   imageUri?: string;
-  position?: {
-    latitude: number;
-    longitude: number;
-  };
+  location?: Location;
 }

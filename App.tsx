@@ -7,6 +7,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AppLoading from "expo-app-loading";
 import { Text, View } from "react-native";
+import { PlacesContextProvider } from "./src/store/placesCtx";
 
 const Navigation = () => {
   const authCtx = useContext(AuthContext);
@@ -55,7 +56,9 @@ const Navigation = () => {
     <NavigationContainer>
       {isAuthenticated ? (
         <ExpensesContextProvider>
-          <MainStack />
+          <PlacesContextProvider>
+            <MainStack />
+          </PlacesContextProvider>
         </ExpensesContextProvider>
       ) : (
         <AuthStack />

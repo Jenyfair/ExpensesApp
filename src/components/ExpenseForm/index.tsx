@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 import Input from "../Input";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./style";
 import globalStyle from "../../../assets/styles/globalStyles";
 import Button from "../Button";

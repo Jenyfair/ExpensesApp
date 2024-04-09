@@ -8,6 +8,7 @@ import { FIREBASE_API_KEY } from "../constants/secret";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getTokenExpirationTime } from "./date";
 import axios, { AxiosInstance } from "axios";
+import { IPlace } from "../types/place";
 
 export enum AuthMode {
   signIn = "signUp",
@@ -130,5 +131,64 @@ export const deleteExpense = (
 ) => {
   return axiosBackendInstance.delete(
     BACKEND_URL + `/expenses/${id}.json?auth=${userToken}`
+  );
+};
+
+export const storePlace = async (
+  axiosBackendInstance: AxiosInstance,
+  placeData: IPlace,
+  userToken: string
+) => {
+  const response = await axiosBackendInstance.post(
+    BACKEND_URL + "/places.json?auth=" + userToken,
+    placeData
+  );
+
+  const id = response.data.name;
+  return id;
+};
+
+export const fetchPlaces = async (
+  axiosBackendInstance: AxiosInstance,
+  userToken: string
+) => {
+  const response = await axiosBackendInstance.get(
+    BACKEND_URL + "/places.json?auth=" + userToken
+  );
+  const places = [];
+
+  for (const key in response.data) {
+    const placeObj = {
+      id: key,
+      title: response.data[key].title,
+      location: response.data[key].location,
+      imageUri: response.data[key].imageUri,
+    };
+    places.push(placeObj);
+  }
+  //console.log("expenses", expenses);
+
+  return places;
+};
+
+export const updatePlace = (
+  axiosBackendInstance: AxiosInstance,
+  id: string,
+  placeData: IPlace,
+  userToken: string
+) => {
+  return axiosBackendInstance.put(
+    BACKEND_URL + `/places/${id}.json?auth=${userToken}`,
+    placeData
+  );
+};
+
+export const deletePlace = (
+  axiosBackendInstance: AxiosInstance,
+  id: string,
+  userToken: string
+) => {
+  return axiosBackendInstance.delete(
+    BACKEND_URL + `/places/${id}.json?auth=${userToken}`
   );
 };

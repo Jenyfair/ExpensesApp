@@ -1,5 +1,6 @@
 import { Image, Pressable, Text, View } from "react-native";
 import { IPlace } from "../../types/place";
+import styles from "./style";
 
 type PlaceItemProps = {
   place: IPlace;
@@ -7,11 +8,14 @@ type PlaceItemProps = {
 };
 const PlaceItem = ({ place, onPress }: PlaceItemProps) => {
   return (
-    <Pressable onPress={onPress}>
-      {/* <Image source={{ uri: place.imageUri }} /> */}
-      <View>
-        <Text>{place.title}</Text>
-        <Text>{place.address}</Text>
+    <Pressable
+      style={({ pressed }) => [pressed && styles.pressed, styles.item]}
+      onPress={onPress}
+    >
+      <Image source={{ uri: place.imageUri }} style={styles.img} />
+      <View style={styles.info}>
+        <Text style={styles.title}>{place.title}</Text>
+        <Text style={styles.address}>{place.location?.address}</Text>
       </View>
     </Pressable>
   );

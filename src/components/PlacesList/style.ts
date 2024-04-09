@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { fontSizeScale } from "../../util/scaling";
+import { fontSizeScale, verticalScale } from "../../util/scaling";
 
 const styles = StyleSheet.create({
   fallBackContainer: {
@@ -9,6 +9,9 @@ const styles = StyleSheet.create({
   },
   fallBackText: {
     fontSize: fontSizeScale(16),
+  },
+  listContainer: {
+    marginTop: verticalScale(6),
   },
 });
 

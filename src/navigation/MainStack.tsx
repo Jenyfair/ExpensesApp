@@ -7,11 +7,14 @@ import ManageExpense from "../screens/ManageExpense";
 import BottomTabNav from "./BottomNavigator";
 import { colors } from "../constants/colors";
 import AddPlace from "../screens/AddPlace";
+import Map from "../screens/Map";
+import { Location } from "../types/location";
 
 export type MainStackParamList = {
   ManageExpense: { expenseId: string | null };
-  AddPlace: undefined;
+  AddPlace: { location: Location | null };
   BottomNav: undefined;
+  Map: { location: Location | null };
 };
 
 export type ManageExpenseProp = NativeStackScreenProps<
@@ -23,6 +26,8 @@ export type AddPlaceProp = NativeStackScreenProps<
   MainStackParamList,
   "AddPlace"
 >;
+
+export type MapProp = NativeStackScreenProps<MainStackParamList, "Map">;
 
 const Stack = createNativeStackNavigator<MainStackParamList>();
 
@@ -47,7 +52,13 @@ const MainStack = () => {
       <Stack.Screen
         name="AddPlace"
         component={AddPlace}
-        options={{ presentation: "modal" }}
+        options={{ headerTitle: "Add a new store" }}
+        initialParams={{ location: null }}
+      />
+      <Stack.Screen
+        name="Map"
+        component={Map}
+        options={{ presentation: "modal", headerTitle: "Choose your location" }}
       />
     </Stack.Navigator>
   );

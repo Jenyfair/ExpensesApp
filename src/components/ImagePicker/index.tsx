@@ -1,6 +1,5 @@
 import { Alert, Image, Text, View } from "react-native";
-import Button from "../Button";
-import { BtnMode } from "../Button/type";
+
 import styles from "./style";
 import {
   PermissionStatus,
@@ -8,8 +7,15 @@ import {
   useCameraPermissions,
 } from "expo-image-picker";
 import { useState } from "react";
+import IconButton from "../IconButton";
+import { fontSizeScale } from "../../util/scaling";
+import { colors } from "../../constants/colors";
 
-const ImagePicker = () => {
+type ImagePickerProps = {
+  onImgPicked: (img: string) => void;
+};
+
+const ImagePicker = (props: ImagePickerProps) => {
   const [cameraPermissionInfo, requestPermission] = useCameraPermissions();
   const [pickedImg, setPickedImg] = useState<string>("");
   const verifyCameraPermission = async () => {
@@ -41,6 +47,7 @@ const ImagePicker = () => {
       return;
     }
     setPickedImg(image.assets[0].uri);
+    props.onImgPicked(image.assets[0].uri);
   };
 
   return (
@@ -53,10 +60,17 @@ const ImagePicker = () => {
           <Image source={{ uri: pickedImg }} style={styles.image} />
         )}
       </View>
-      <View style={styles.btnContainer}>
-        <Button btnMode={BtnMode.regular} onPress={takePhotoHandler}>
-          Take a photo
-        </Button>
+      <View>
+        <IconButton
+          icon={{
+            size: fontSizeScale(24),
+            name: "camera",
+            color: colors.primary500,
+          }}
+          onPress={takePhotoHandler}
+          text={"Take a photo"}
+          textStyle={styles.btnText}
+        />
       </View>
     </View>
   );

@@ -19,6 +19,7 @@ const PlacesList = (props: PlaceListProps) => {
   }
   return (
     <FlatList
+      style={styles.listContainer}
       data={props.places}
       keyExtractor={(place: IPlace) => place.id}
       renderItem={({ item }) => (

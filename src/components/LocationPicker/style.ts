@@ -1,13 +1,17 @@
 import { StyleSheet } from "react-native";
-import { horizontalScale, verticalScale } from "../../util/scaling";
 import { colors } from "../../constants/colors";
+import {
+  fontSizeScale,
+  horizontalScale,
+  verticalScale,
+} from "../../util/scaling";
 
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: horizontalScale(6),
     paddingVertical: verticalScale(8),
   },
-  imagePreview: {
+  locationPreview: {
     width: "100%",
     height: horizontalScale(200),
     backgroundColor: colors.lightGray,
@@ -27,10 +31,12 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     textAlign: "center",
   },
-
+  btnsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
   btnText: {
-    fontWeight: "bold",
-    textTransform: "uppercase",
+    fontSize: fontSizeScale(16),
   },
 });
 

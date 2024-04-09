@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 import { IExpense } from "../types/expense";
-import { ExpensesActions, Types, expenseReducer } from "./ExpensesReducer";
+import { ExpensesActions, Types, expenseReducer } from "./expensesReducer";
 
 type InitialStateType = {
   expenses: IExpense[];

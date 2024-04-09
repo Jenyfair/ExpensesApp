@@ -9,7 +9,7 @@ import { colors } from "../../constants/colors";
 const styles = StyleSheet.create({
   inputContainer: {
     marginHorizontal: horizontalScale(4),
-    marginVertical: verticalScale(16),
+    marginVertical: verticalScale(6),
   },
   label: {
     fontSize: fontSizeScale(14),

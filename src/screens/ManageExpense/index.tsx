@@ -80,6 +80,7 @@ const ManageExpense = ({ navigation, route }: ManageExpenseProp) => {
   };
   const addHandler = async (expenseData: any) => {
     setIsLoading(true);
+
     try {
       const id = await storeExpense(axBe, expenseData, userToken);
       console.log("addHandler", "id from Fiebase:", id);
