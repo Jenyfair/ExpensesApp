@@ -1,5 +1,3 @@
-import { Pressable, Text, View } from "react-native";
-import styles from "./style";
 import ExpensesOutput from "../../components/ExpensesOutput";
 import { useContext } from "react";
 import { ExpensesContext } from "../../store/expensesCtx";

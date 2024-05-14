@@ -9,12 +9,14 @@ import { colors } from "../constants/colors";
 import AddPlace from "../screens/AddPlace";
 import Map from "../screens/Map";
 import { Location } from "../types/location";
+import PlaceDetails from "../screens/PlaceDetails";
 
 export type MainStackParamList = {
   ManageExpense: { expenseId: string | null };
   AddPlace: { location: Location | null };
   BottomNav: undefined;
-  Map: { location: Location | null };
+  Map: { location: Location | undefined };
+  PlaceDetails: { placeId: string };
 };
 
 export type ManageExpenseProp = NativeStackScreenProps<
@@ -25,6 +27,11 @@ export type ManageExpenseProp = NativeStackScreenProps<
 export type AddPlaceProp = NativeStackScreenProps<
   MainStackParamList,
   "AddPlace"
+>;
+
+export type PlaceDetailsProp = NativeStackScreenProps<
+  MainStackParamList,
+  "PlaceDetails"
 >;
 
 export type MapProp = NativeStackScreenProps<MainStackParamList, "Map">;
@@ -60,6 +67,7 @@ const MainStack = () => {
         component={Map}
         options={{ presentation: "modal", headerTitle: "Choose your location" }}
       />
+      <Stack.Screen name="PlaceDetails" component={PlaceDetails} />
     </Stack.Navigator>
   );
 };

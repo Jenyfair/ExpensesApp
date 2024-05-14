@@ -7,16 +7,23 @@ import { MapProp } from "../../navigation/MainStack";
 import IconButton from "../../components/IconButton";
 import { fontSizeScale } from "../../util/scaling";
 
-const Map = ({ navigation }: MapProp) => {
-  const [selectedLocation, setSelectedLocation] = useState<Location>();
+const Map = ({ navigation, route }: MapProp) => {
+  const initialPlace = route.params.location;
+  const [selectedLocation, setSelectedLocation] = useState<
+    Location | undefined
+  >(initialPlace);
+
   const region = {
-    latitude: 37.78,
-    longitude: -122.43,
+    latitude: initialPlace ? initialPlace.position.latitude : 37.78,
+    longitude: initialPlace ? initialPlace.position.longitude : -122.43,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
 
   const selectLocationHandler = (event: MapPressEvent) => {
+    if (initialPlace) {
+      return;
+    }
     //console.log("click on map event", event);
     const lat = event.nativeEvent.coordinate.latitude;
     const lgt = event.nativeEvent.coordinate.longitude;
@@ -38,6 +45,9 @@ const Map = ({ navigation }: MapProp) => {
   }, [selectedLocation, navigation]);
 
   useLayoutEffect(() => {
+    if (initialPlace) {
+      return;
+    }
     navigation.setOptions({
       headerRight: ({ tintColor }) => (
         <IconButton
@@ -50,7 +60,7 @@ const Map = ({ navigation }: MapProp) => {
         />
       ),
     });
-  }, [navigation, savePickedLocationHandler]);
+  }, [navigation, savePickedLocationHandler, initialPlace]);
 
   return (
     <MapView
